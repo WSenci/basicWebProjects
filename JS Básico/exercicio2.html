@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 2</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            background-color: rgb(93, 0, 255);
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        section {
+            text-align: left;
+            margin: auto;
+            padding: 15px;
+            width: 300px;
+            min-height: 200px;
+            background-color: rgb(255, 255, 255);
+            color: black;
+            border-radius: 15px;
+            box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .parag {
+            display: inline-block;
+        }
+
+        ul {
+            padding: 5px 5px;
+            top: 0;
+            border-style: groove;
+            min-height: 100px;
+            width: 35%;
+            border-radius: 10px;
+        }
+
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Contagem</h1>
+    </header>
+
+    <section>
+        <div>
+
+            <p class="parag">Início: <input type="number" name="n1" id="n1"></p>
+            <p class="parag">Fim: <input type="number" name="n2" id="n2"></p>
+            <p class="parag">Passos: <input type="number" name="n3" id="n3"></p>
+            <input type="button" value="CONTAR" id="contar" onclick="contagem()">
+
+        </div>
+
+        <div id="res">
+
+            <p>Preparando a cotagem...</p>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; @WSencii</p>
+    </footer>
+    <br><br><br>
+    <header>
+        <h1>Tabuada</h1>
+    </header>
+
+    <section>
+        <div>
+
+            <p class="parag">Número: <input type="number" name="vezes" id="vezes"></p>
+            <input type="button" value="TABUADA" id="tbd" onclick="tabuada()">
+
+        </div>
+
+        <div>
+
+            <ul style="display: inline-block; margin-top: 20px;" id="tabela">
+                <li>Digite um número acima.</li>
+            </ul>
+
+            <select style="display: inline-block; width: 58%; margin-top: 20px; padding: 5px 5px; " name="selTab" id="selTab" size="2">
+                <option value="v1">Digite um número acima.</option>
+            </select>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; @WSencii</p>
+    </footer>
+
+    <script>
+
+        let num1 = window.document.getElementById('n1')
+        let num2 = window.document.getElementById('n2')
+        let num3 = window.document.getElementById('n3')
+        let contar = window.document.getElementById('contar')
+        let res = window.document.getElementById('res')
+
+        function contagem() {
+
+
+            if (num1.value.length == 0 || num2.value.length == 0 || num3.value.length == 0) {
+                alert('O INÍCIO PRECISA TER ALGUM NÚMERO!')
+            } else {
+                res.innerHTML = `<p>Contando: </p>`
+                let i = Number(num1.value)
+                let f = Number(num2.value)
+                let p = Number(num3.value)
+                if (p <= 0) {
+                    alert('PASSOS NÃO PODE SER ZERO! CONTANDO COMO PASSO 1')
+                    p = 1
+                }
+                if (i < f) {
+                    for (let c = i; c <= f; c += p) {
+                        res.innerHTML += ` ${c} \u{1F449}`
+                    }
+                } else {
+                    for (let c = i; c >= f; c -= p) {
+                        res.innerHTML += ` ${c} \u{1F449}`
+                    }
+                }
+                res.innerHTML += `\u{1F3C1}`
+
+            }
+        }
+
+        //////////////////////
+        //////////////////////
+        //////////////////////
+
+        let vzs = window.document.getElementById('vezes')
+        let tbd = window.document.getElementById('tbd')
+        let tabela = window.document.getElementById('tabela')
+        let selTab = window.document.getElementById('selTab')
+
+        function tabuada() {
+
+            let v = Number(vzs.value)
+            if (v == '') {
+                window.alert('Coloque algum número!')
+            } else {
+                tabela.innerHTML = `<p style= 'margin: 10px auto;'>Tabuada do ${v}:</p>`
+                selTab.innerHTML = `<option>Tabuada do ${v}:</option>`
+                for (let z = 0; z <= 10; z++) {
+                    let resp = v * z
+
+                    selTab.size = '16'
+
+                    selTab.innerHTML += `<option style='margin: 5px auto;'>${v} x ${z} = ${resp}</option>`
+
+                    tabela.innerHTML += `<li style= 'margin: 5px auto;'>${v} x ${z} = ${resp}</li>`
+
+                }
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

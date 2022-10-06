@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 3</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            background-color: rgb(93, 0, 255);
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        section {
+            text-align: left;
+            margin: auto;
+            padding: 15px;
+            width: 450px;
+            min-height: 200px;
+            background-color: rgb(255, 255, 255);
+            color: black;
+            border-radius: 15px;
+            box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .parag {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Análise de números</h1>
+    </header>
+
+    <section>
+        <div>
+
+            <p class="parag">Número (entre 1 e 100): <input type="number" name="num" id="num"></p>
+            <input type="button" value="ADICIONAR" id="add" onclick="adicionar()">
+
+            <p>Digite um número acima.</p>
+            <select style="display: inline-block; width: 60%; margin-top: 5px; padding: 5px 5px; " name="numList"
+                id="numList" size="10">
+
+            </select>
+            <br>
+            <input type="button" value="FINALIZAR" id="fin" onclick="finalizar()">
+
+        </div>
+
+        <div id="res">
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; @WSencii</p>
+    </footer>
+
+    <script>
+
+
+        let num = window.document.getElementById('num')
+        let numList = window.document.getElementById('numList')
+        let res = document.querySelector('div#res')
+        let arrList = []
+
+        function inLista(n, l) {
+            if (l.indexOf(Number(n)) != -1) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+        function adicionar() {
+
+
+            if (Number(num.value) >= 1 && Number(num.value) <= 100 && !inLista(num.value, arrList)) {
+                numList.innerHTML += `<option>Valor ${Number(num.value)} adicionado.</option>`
+                arrList.push(Number(num.value))
+                res.innerHTML = ''
+                // arrList.sort((a, b) => a - b)
+
+            } else {
+                window.alert('Número inválido ou já inserido na lista.')
+
+            }
+            console.log(arrList)
+            console.log(arrList.length)
+            console.log(arrList[arrList.length - 1])
+            num.value = ''
+            num.focus()
+
+        }
+
+        function finalizar() {
+            if (arrList.length == 0) {
+
+                window.alert('Adicione itens à lista.')
+
+            } else {
+
+                let total = arrList.length
+                let maior = arrList[0]
+                let menor = arrList[0]
+                let soma = 0
+                let media = 0
+                for (let pos in arrList){
+                    soma += arrList[pos]
+                    if (arrList[pos] > maior)
+                        maior = arrList[pos]
+                    
+                    if (arrList[pos] < menor)
+                        menor = arrList[pos]
+                    
+                }
+                media = soma / total
+                res.innerHTML = ''
+                res.innerHTML += `<p>Ao todo temos ${total} números adicionados.</p>`
+                res.innerHTML += `<p>O maior valor é ${maior}.</p>`
+                res.innerHTML += `<p>O menor valor é ${menor}.</p>`
+                res.innerHTML += `<p>Somando todos os valores, temos ${soma}.</p>`
+                res.innerHTML += `<p>A média de todos os valores é ${media}</p>`
+            }
+        }
+
+    </script>
+</body>
+
+</html>

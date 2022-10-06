@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOGO DA VELHA</title>
+    <style>
+
+        body{
+            text-align: center;
+        }
+        h1{
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        .quadrado{
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background-color: rgb(87, 82, 245);
+            border: 1px solid rgb(43, 43, 43);
+            border-radius: 5px;
+        }
+        .o{
+            position: relative;
+        }
+        .o::after{
+            position: absolute;
+            content: "\2B55";
+            font-size: 50px;
+            line-height: 100px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .x{
+            position: relative;
+        }
+        .x::after{
+            position: absolute;
+            content: "\274C";
+            font-size: 50px;
+            line-height: 100px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <h1>JOGO DA VELHA</h1>
+
+    <div class="tabuleiro">
+        <div class="linha">
+            <div id="0" class="quadrado"></div>
+            
+            <div id="1" class="quadrado"></div>
+            
+            <div id="2" class="quadrado"></div>
+        </div>
+        <div class="linha">
+            <div id="3" class="quadrado"></div>
+            <div id="4" class="quadrado"></div>
+            <div id="5" class="quadrado"></div>
+        </div>
+        <div class="linha">
+            <div id="6" class="quadrado"></div>
+            <div id="7" class="quadrado"></div>
+            <div id="8" class="quadrado"></div>
+        </div>
+    </div>
+
+    <script src="./game.js"></script>
+    <script src="./interface.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercício</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            background-color: #007bff;
+            color: rgb(255, 255, 255);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        section {
+            width: 350px;
+            background-color: #ffffff;
+            margin: auto;
+            border-radius: 15px;
+            color: black;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.504);
+        }
+    </style>
+</head>
+
+<body onload="carregar()">
+
+    <header>
+        <h1>HORA DO DIA</h1>
+    </header>
+
+    <section id="cnt">
+        <div id="msg">Horário</div>
+        <div id="foto">
+            <img id="imagem" src="./manha_site.png" alt="Foto da manhã">
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; @WSencii</p>
+    </footer>
+
+    </br></br></br>
+
+    <header>
+        <h1>VERIFICADOR DE IDADE</h1>
+    </header>
+
+    <section>
+        <div>
+            <p>Ano de nascimento: 
+                <input type="number" id="txtano" min="0">
+            </p>
+            <p>Sexo:
+                <input type="radio" name="radSex" id="masc" checked>
+                <label for="masc">Masculino</label>
+                <input type="radio" name="radSex" id="fem">
+                <label for="fem">Feminino</label>
+            </p>
+            <p>
+                <input type="button" value="Verificar" onclick="verificar()">
+            </p>
+        </div>
+
+        <div id="res">
+            Preencha os dados a cima.
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; @WSencii</p>
+    </footer>
+
+    <script>
+        function carregar() {
+            let msg = window.document.getElementById('msg');
+            let img = window.document.getElementById('imagem');
+            let cnt = window.document.getElementById('cnt');
+            let data = new Date();
+            let hora = data.getHours();
+            msg.innerHTML = `Agora são ${hora} horas.`
+            if (hora >= 5 && hora < 12) {
+                msg.innerHTML = `<p>Bom dia!</p><p>Agora são ${hora} horas.</p>`
+                img.src = 'manha_site.png'
+                document.body.style.background = '#55b1fd'
+                cnt.style.background = '#effd55'
+            } else if (hora >= 12 && hora < 17) {
+                msg.innerHTML = `<p>Boa tarde!</p><p>Agora são ${hora} horas.</p>`
+                img.src = 'dia_site.png'
+                document.body.style.background = '#007bff'
+                cnt.style.background = '#ffffff'
+            } else if (hora >= 17 && hora < 19) {
+                msg.innerHTML = `<p>Boa tarde!</p><p>Agora são ${hora} horas.</p>`
+                img.src = 'tarde_site.png'
+                document.body.style.background = '#fd9b55'
+                cnt.style.background = '#effd55'
+            } else {
+                msg.innerHTML = `<p>Boa noite!</p><p>Agora são ${hora} horas.</p>`
+                img.src = 'noite_site.png'
+                document.body.style.background = '#0e0d38'
+                cnt.style.background = '#5f5f5f'
+            }
+        }
+        //
+        //
+        //
+        function verificar() {
+            let data1 = new Date()
+            let ano = data1.getFullYear()
+            let fano = document.getElementById('txtano')
+            let res = document.getElementById('res')
+            if (fano.value.length == 0 || Number(fano.value) > ano){
+                window.alert('[ERRO] Verifique os dados e tente novamente.')
+            } else {
+                let fsex = document.getElementsByName('radSex')
+                let idade = ano - Number(fano.value)
+                let genero = ''
+                let stts = ''
+                let img1 = document.createElement('img')
+                img1.setAttribute('id', 'foto1')
+                if (fsex [0].checked){
+                    genero = 'Homem'
+                    if (idade >=0 && idade < 10) {
+                        img1.setAttribute('src', './idades_site.png')
+                        stts = 'crainça'
+                    } else if (idade < 21) {
+                        img1.setAttribute('src', './idades_site.png')
+                        stts = 'jovem'
+                    } else if (idade < 50) {
+                        img1.setAttribute('src', './idades_site.png')
+                        stts = 'adulto'
+                    } else {
+                        img1.setAttribute('src', './idades_site.png')
+                        stts = 'idoso'
+                    }
+
+
+                } else if (fsex[1]) {
+                    genero = 'Mulher'
+                    if (idade >=0 && idade < 10) {
+                        img1.setAttribute('src', './idades_site.png')
+                        stts = 'crainça'
+                    } else if (idade < 21) {
+                        img1.setAttribute('src', './idades_site.png')
+                        stts = 'jovem'
+                    } else if (idade < 50) {
+                        img1.setAttribute('src', './idades_site.png')
+                        stts = 'adulta'
+                    } else {
+                        img1.setAttribute('src', './idades_site.png')
+                        stts = 'idosa'
+                    }
+                     
+                }
+                res.style.textAlign = 'center'
+                res.innerHTML = `Detectamos ${genero} ${stts} com ${idade} anos.`
+                res.appendChild(img1)
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

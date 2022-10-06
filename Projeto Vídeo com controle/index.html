@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vídeo com controle</title>
+
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 640px;
+            height: 360px;
+            overflow: hidden;
+        }
+
+        .video {
+            position: absolute;
+            width: 100%;
+        }
+
+        .capsula {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            transform: translateY(10%);
+            transition: transform 0.25s;
+            transition: 0.25s;
+        }
+
+        .capsula:hover {
+            transform: translateY(0);
+            opacity: 100%;
+        }
+
+        .barraProgresso {
+            position: absolute;
+            bottom: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 75%;
+            height: 3px;
+            background-color: rgba(128, 128, 128, 0.577);
+        }
+
+        #progresso {
+            background-color: red;
+            height: 100%;
+            width: 0;
+        }
+
+        .controle {
+            position: absolute;
+            margin-left: 50%;
+            bottom: 5px;
+            width: 80%;
+            height: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transform: translateX(-50%);
+            background-color: rgb(110, 110, 110);
+        }
+
+        .btn {
+            position: relative;
+            width: 30px;
+            margin: 0 8px;
+            top: 100%;
+            transform: translateY(-100%);
+        }
+
+        .btn1 {
+            position: relative;
+            width: 25px;
+            padding: 2.5px;
+            margin: 0 8px;
+            top: 100%;
+            transform: translateY(-100%);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>VídeoPlayer</h1>
+
+    <div class="container">
+        <video id="video1" class="video"
+            src="./assets/video/KDA - MORE ft. Madison Beer, (G)I-DLE, Lexie Liu, Jaira Burns, Seraphine (Official Music Video).mp4"
+            controller></video>
+        <div class="capsula">
+            <div class="barraProgresso">
+                <div id="progresso"></div>
+            </div>
+            <div class="controle">
+                <img class="btn" onclick="volta()" src="./assets/images/volta10.png">
+                <img class="btn" id="btnPlay" status="true" src="./assets/images/play.png">
+                <!-- <img class="btn" onclick="playPause()" src="./assets/images/pausa.png"> -->
+                <img class="btn" onclick="avanca()" src="./assets/images/avanca10.png">
+                <img class="btn" onclick="volumeMenos()" src="./assets/images/volume-.png">
+                <img class="btn" onclick="volumeMais()" src="./assets/images/volume+.png">
+                <img class="btn1" onclick="menos()" src="./assets/images/menos.png">
+                <img class="btn1" onclick="mais()" src="./assets/images/mais.png">
+                <img class="btn" onclick="full()" src="./assets/images/full.png">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let video = document.getElementById("video1");
+        
+        let barraProgresso = document.getElementById("progresso");
+
+        video.addEventListener("timeupdate", (e) => {
+            let tempoCorrido = e.target.currentTime;
+            let duracao = e.target.duration;
+            let tamanhoProgresso = (tempoCorrido / duracao) * 100;
+
+            barraProgresso.style.width = tamanhoProgresso + "%";
+        })
+        
+        function volta() {
+            video.currentTime -= 10;
+        }
+
+        btnPlay.addEventListener("click", () => {
+            let sts = btnPlay.getAttribute("status");
+            if (sts == "true") {
+                video.play();
+                btnPlay.setAttribute("src", "./assets/images/pausa.png");
+                btnPlay.setAttribute("status", "false");
+            }
+            if (sts == "false") {
+            video.pause();
+            btnPlay.setAttribute("src", "./assets/images/play.png");
+            btnPlay.setAttribute("status", "true");
+            }
+        })
+
+        function avanca() {
+            video.currentTime += 10;
+        }
+
+        function menos() {
+            video.playbackRate -= 0.25;
+        }
+
+        function mais() {
+            video.playbackRate += 0.25;
+        }
+
+        function volumeMenos() {
+            video.volume -= 0.05;
+        }
+
+        function volumeMais() {
+            video.volume += 0.05;
+        }
+
+        function full() {
+            video.requestFullscreen();
+        }
+
+    </script>
+
+</body>
+
+</html>
